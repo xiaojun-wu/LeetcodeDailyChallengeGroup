@@ -26,8 +26,4 @@ public:
         return res;
     }
 };
-/*
-[10,13,12,14,15]
-[2,3,1,1,4]
-[5,1,3,4,2]
-*/
+// https://github.com/xiaojun-wu/LeetcodeDailyChallengeGroup/blob/master/leetcode975_Odd_Even_Jump.cpp
