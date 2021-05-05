@@ -19,3 +19,4 @@ public:
         return res;
     }
 };
+// https://github.com/xiaojun-wu/LeetcodeDailyChallengeGroup/blob/master/leetcode1793_Maximum_Score_of_a_Good_Subarray.cpp
