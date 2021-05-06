@@ -24,3 +24,4 @@ public:
         return area == (p2.first - p1.first) * (p2.second - p1.second);
     }
 };
+// https://tinyurl.com/uhd6da95
