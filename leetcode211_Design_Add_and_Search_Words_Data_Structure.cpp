@@ -49,3 +49,5 @@ private:
  * obj->addWord(word);
  * bool param_2 = obj->search(word);
  */
+
+ // https://tinyurl.com/2jbjjutv
