@@ -56,3 +56,4 @@ public:
 case 1. characters in substring are same.
 case 2. contains two or more characters in substring.
 */
+// https://tinyurl.com/kf38srtf
