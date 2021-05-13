@@ -65,3 +65,4 @@ private:
             cur->children[word[idx] - 'a'] = nullptr;
     }
 };
+// https://tinyurl.com/ytnxmsym
