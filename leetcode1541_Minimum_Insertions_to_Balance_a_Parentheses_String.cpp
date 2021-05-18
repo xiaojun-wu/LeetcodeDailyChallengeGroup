@@ -22,3 +22,4 @@ public:
         return insert + left * 2;
     }
 };
+// https://tinyurl.com/hyfxzscs
