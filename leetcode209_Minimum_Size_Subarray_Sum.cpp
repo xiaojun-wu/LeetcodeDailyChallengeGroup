@@ -16,3 +16,4 @@ public:
         return res == SIZE + 1?0:res;
     }
 };
+// https://tinyurl.com/3675s28p
