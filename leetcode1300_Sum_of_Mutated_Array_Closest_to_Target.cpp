@@ -20,8 +20,10 @@ public:
             }
             if(sum < target)
                 left = mid + 1;
-            else
+            else if(sum > target)
                 right = mid - 1;
+            else
+                break;
         }
         
         return res;
