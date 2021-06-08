@@ -26,3 +26,4 @@ public:
         return min(res,pq.top() - minVal);
     }
 };
+// https://tinyurl.com/68eu9c4s
