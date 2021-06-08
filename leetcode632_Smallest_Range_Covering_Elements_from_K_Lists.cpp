@@ -31,3 +31,5 @@ the smallest range [l,r] that l and r are exist in nums.
 if a = l, we want to find the smallest b that all lists have at least one
 number in range [a,b].
 */
+
+// https://tinyurl.com/eh8k6hdb
