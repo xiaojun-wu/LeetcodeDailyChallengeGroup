@@ -95,3 +95,5 @@ private:
  * obj->addElement(num);
  * int param_2 = obj->calculateMKAverage();
  */
+
+ // https://tinyurl.com/4c2wmxde
