@@ -39,3 +39,4 @@ public:
         return maxMin % MOD;
     }
 };
+// https://tinyurl.com/abvb2y2f
