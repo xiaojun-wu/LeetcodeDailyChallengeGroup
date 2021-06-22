@@ -1,24 +1,38 @@
 class Solution {
 public:
     int numTriplets(vector<int>& nums1, vector<int>& nums2) {
+        /*
+        brute force + hashmap with count frequences.
+        TC : O(M * N), SC : O(M + N)
+        */
         const int SIZE1 = nums1.size(), SIZE2 = nums2.size();
         int res = 0;
-        unordered_map<long,int> mp1, mp2;
+        unordered_map<int,int> freq1, freq2;
         
-        for(int i = 0;i < SIZE1;i++)
-            for(int j = i + 1;j < SIZE1;j++)
-                mp1[(long)nums1[i] * (long)nums1[j]]++;
+        for(int n : nums1)
+            freq1[n]++;
+        for(int n : nums2)
+            freq2[n]++;
         
-        for(int i = 0;i < SIZE2;i++)
-            for(int j = i + 1;j < SIZE2;j++)
-               mp2[(long)(nums2[i]) * (long)(nums2[j])]++;
+        function<void()> helper = [&](){
+            for(auto& [num1,count1] : freq1){
+                for(auto& [num2,count2] : freq2){
+                    long long sqr = (long)num1 * (long)num1;
+                    if(sqr % num2 != 0) continue;
+                    if(sqr / num2 > INT_MAX || !freq2.count(sqr / num2)) continue;
+                    int num3 = sqr / num2,count3 = freq2[num3];
+                    if(num2 == num3)
+                        res+= count1 * (count2 * (count2 - 1) / 2);
+                    else if(num2 < num3){
+                        res+= count1 * count2 * count3;
+                    }
+                }
+            }
+        };
         
-        for(long n : nums1)
-            if(mp2.count(n * n))
-                res+= mp2[n * n];
-        for(long n : nums2)
-            if(mp1.count(n * n))
-                res+= mp1[n * n];
+        helper();
+        swap(freq1,freq2);
+        helper();
         
         return res;
     }
