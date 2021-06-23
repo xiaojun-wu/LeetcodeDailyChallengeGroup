@@ -1,3 +1,16 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
         /*
         imaging if left to right is a queue,
         there are "1 2 3 4 5" numbers in queue.
@@ -24,3 +37,6 @@
             pre->next = temp;
         }
         return preHead->next;
+    }
+};
+// https://tinyurl.com/36mv977h
