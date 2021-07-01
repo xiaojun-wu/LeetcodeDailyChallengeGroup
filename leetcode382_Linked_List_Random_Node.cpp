@@ -48,3 +48,5 @@ private:
  * Solution* obj = new Solution(head);
  * int param_1 = obj->getRandom();
  */
+
+ // https://tinyurl.com/2kxbnbp6
