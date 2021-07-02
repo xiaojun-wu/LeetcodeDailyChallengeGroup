@@ -13,21 +13,41 @@ public:
     void reorderList(ListNode* head) {
         /*
         TC : O(N)
-        SC : O(n)
+        SC : O(1)
+        reverse the last half part and merge with the first half.
         */
-        ListNode* pre = new ListNode(0);
-        vector<ListNode*> nodes;
-        
-        while(head){
-            nodes.push_back(head);
-            head = head->next;
+        if(head->next == nullptr)
+            return;
+        int len = 0;
+        ListNode* cur = head, *pre = new ListNode(0), *temp = nullptr;
+        ListNode* first = head, *second = nullptr;
+        // count length of nodes.
+        while(cur){
+            len++;
+            cur = cur->next;
         }
-        
-        for(int i = 0;i < (nodes.size() + 1) / 2;i++){
-            pre->next = nodes[i];
-            nodes[i]->next = nodes[nodes.size() - i - 1];
-            pre = nodes[nodes.size() - i - 1];
+        // find the first node of last half.
+        cur = head;
+        for(int i = 0;i < (len + 1) / 2;i++)
+            cur = cur->next;
+        pre->next = cur;
+        // reverse the last half part.
+        while(cur->next){
+            temp = cur->next;
+            cur->next = temp->next;
+            temp->next = pre->next;
+            pre->next = temp;
         }
-        pre->next = nullptr;
+        second = pre->next;
+        // merge the first half and last half part.
+        while(first && second){
+            ListNode* first_next = first->next, *second_next = second->next;
+            first->next = second;
+            second->next = first_next;
+            first = first_next;
+            second = second_next;
+        }
+        if(first != nullptr)
+            first->next = nullptr;
     }
 };
