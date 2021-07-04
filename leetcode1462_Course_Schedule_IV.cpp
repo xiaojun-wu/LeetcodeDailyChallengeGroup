@@ -19,7 +19,6 @@ public:
         while(!q.empty()){
             for(int i = q.size();i > 0;i--){
                 int node = q.front();
-                // cout<<node<<" ";
                 q.pop_front();
                 for(int nei : adjacents[node]){
                     indegree[nei]--;
@@ -42,3 +41,5 @@ public:
         return res;
     }
 };
+
+// https://tinyurl.com/5dbrxda5
