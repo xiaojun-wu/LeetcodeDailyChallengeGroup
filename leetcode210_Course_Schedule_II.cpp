@@ -30,3 +30,4 @@ public:
         return res.size() == numCourses?res:empty;
     }
 };
+// https://tinyurl.com/4nxpuw
