@@ -44,3 +44,5 @@ Input: numCourses = 2, prerequisites = [[1,0]]
 courses with no pre : 0
 courses with no pre : 
 */
+
+// https://tinyurl.com/p38vuhzx
