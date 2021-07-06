@@ -19,3 +19,5 @@ private:
  * NumArray* obj = new NumArray(nums);
  * int param_1 = obj->sumRange(left,right);
  */
+
+ // https://tinyurl.com/4sh5yxyk
