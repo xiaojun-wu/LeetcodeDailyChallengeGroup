@@ -48,3 +48,5 @@ private:
  * bool param_2 = obj->remove(val);
  * int param_3 = obj->getRandom();
  */
+
+ // https://tinyurl.com/6cr8tvcx
