@@ -12,3 +12,5 @@ public:
         return val % 10 + 1;
     }
 };
+
+// https://tinyurl.com/4cppxby4
