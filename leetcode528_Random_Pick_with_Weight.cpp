@@ -1,23 +1,19 @@
 class Solution {
 public:
     Solution(vector<int>& w) {
-        presum = vector<int>(1,0);
-        
-        for(int n : w)
-            presum.push_back(presum.back() + n);
-        
+        weights = move(w);
+        for(int i = 1;i < weights.size();i++)
+            weights[i]+= weights[i - 1];
         srand(time(NULL));
     }
     
     int pickIndex() {
-        int sum = presum.back();
-        int pickNum = rand() % sum + 1;
-        int idx = lower_bound(presum.begin(),presum.end(),pickNum) - presum.begin() - 1;
-        
+        int w = rand() % weights.back() + 1;
+        int idx = lower_bound(weights.begin(),weights.end(),w) - weights.begin();
         return idx;
     }
 private:
-    vector<int> presum;
+    vector<int> weights;
 };
 
 /**
