@@ -1,23 +1,26 @@
 class Solution {
 public:
     int minSkips(vector<int>& dist, int speed, int hoursBefore) {
+        /*
+        store the total distance instead of the speeding time.
+        avoid to precision loss.
+        */
         const int SIZE = dist.size();
-        vector<double> travalTimes(SIZE,0);
-        vector<double> dp(SIZE,100000001);
+        vector<long long> dp(SIZE,1000000000);
+        double _speed = speed;
         dp[0] = 0;
         
-        for(int i = 0;i < SIZE;i++)
-            travalTimes[i] = dist[i] / (double)(speed);
-        
         for(int i = 0;i < SIZE - 1;i++){
-            double time = travalTimes[i];
-            for(int j = i + 1;j > 0;j--)
-                dp[j] = min(ceil(dp[j] + time - 1e-9),dp[j - 1] + time);
-            dp[0]+= ceil(time);
+            for(int j = i + 1;j > 0;j--){
+                long long a = (long long)(ceil((dp[j] + dist[i]) / _speed) * _speed);
+                long long b = dp[j - 1] + dist[i];
+                dp[j] = min(a,b);
+            }
+            dp[0]+= (long long)(ceil(dist[i] / _speed) * _speed);
         }
         
         for(int i = 0;i < SIZE;i++)
-            if(dp[i] + travalTimes.back() <= (double)(hoursBefore))
+            if((dp[i] / _speed) + (dist.back() / _speed) <= (double)(hoursBefore))
                 return i;
         
         return -1;
