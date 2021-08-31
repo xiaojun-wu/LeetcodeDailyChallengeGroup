@@ -1,102 +1,87 @@
+/**
+ * Definition for a point.
+ * struct Point {
+ *     int x;
+ *     int y;
+ *     Point() : x(0), y(0) {}
+ *     Point(int a, int b) : x(a), y(b) {}
+ * };
+ */
+
 class Solution {
 public:
     /**
-     * @param grid: the 2D grid
-     * @return: the number of distinct islands
+     * @param n: An integer
+     * @param m: An integer
+     * @param operators: an array of point
+     * @return: an integer array
      */
-    int numDistinctIslands2(vector<vector<int>> &grid) {
+    vector<int> numIslands2(int n, int m, vector<Point> &operators) {
         // write your code here
-        const int ROW = grid.size(), COL = grid[0].size();
+        const int SIZE = operators.size();
         vector<vector<int>> dir = {{1,0},{-1,0},{0,1},{0,-1}};
-        auto cmp = [](auto& a,auto& b) {
-            if(a.first != b.first)
-                return a.first < b.first;
-            return a.second < b.second;
-        };
-        set<vector<pair<int,int>>> seen;
-        vector<pair<int,int>> cur;
-        int res = 0;
-
-        function<void(int,int)> dfs = [&](int r,int c) {
-            grid[r][c] = 0;
-            cur.emplace_back(r,c);
-            for(vector<int>& d : dir){
+        vector<int> res;
+        DSU dsu(n * m);
+        
+        for(auto& op : operators){
+            int r = op.x, c = op.y;
+            dsu.beIsland(op.x * m + op.y);
+            for(auto& d : dir){
                 int nr = r + d[0], nc = c + d[1];
-                if(nr < 0 || nc < 0 || nr == ROW || nc == COL || grid[nr][nc] == 0)
+                if(nr < 0 || nc < 0 || nr == n || nc == m || !dsu.isIsland(nr * m + nc))
                     continue;
-                dfs(nr,nc);
+                dsu.unionNodes(r * m + c,nr * m + nc);
             }
-        };
-
-        function<pair<int,int>(int,int,int)> rotate = [](int r,int c,int row) ->pair<int,int> {
-            return {c,row - r - 1};
-        };
-
-        function<void(int)> updownflip = [&](int row) {
-            for(int i = 0;i < cur.size();i++)
-                cur[i].first = row - cur[i].first - 1;
-        };
-
-        function<void(int)> leftrightflip = [&](int col) {
-            for(int i = 0;i < cur.size();i++)
-                cur[i].second = col - cur[i].second - 1;
-        };
-
-        function<int(int,int)> checkFlip = [&](int row,int col) ->int {
-            int count = 0;
-            updownflip(row);
-            sort(cur.begin(),cur.end());
-            count+= seen.insert(cur).second;
-            leftrightflip(col);
-            sort(cur.begin(),cur.end());
-            count+= seen.insert(cur).second;
-            updownflip(row);
-            sort(cur.begin(),cur.end());
-            count+= seen.insert(cur).second;
-            leftrightflip(col);
-        } ;
-
-        function<void()> check = [&]() {
-            int rowOffSet = ROW, colOffSet = COL;
-            int row = 0, col = 0, count = 0;
-            for(auto p : cur){
-                rowOffSet = min(rowOffSet,p.first);
-                colOffSet = min(colOffSet,p.second);
-            }
-            for(auto& p : cur){
-                p.first-= rowOffSet;
-                p.second-= colOffSet;
-                row = max(row,p.first + 1);
-                col = max(col,p.second + 1);
-            }
-
-            for(int i = 0;i < 4;i++){
-                sort(cur.begin(),cur.end());
-                // for(auto& p : cur)
-                //     cout<<p.first<<" "<<p.second<<",";
-                // cout<<endl;
-                count+= seen.insert(cur).second;
-                checkFlip(row,col);
-                for(int j = 0;j < cur.size();j++)
-                    cur[j] = rotate(cur[j].first,cur[j].second,row);
-                swap(row,col);
-            }
-            // cout<<endl;
-
-            if(count > 0)
-                res++;
-        };
-
-        for(int r = 0;r < ROW;r++)
-            for(int c = 0;c < COL;c++)
-                if(grid[r][c]){
-                    dfs(r,c);
-                    check();
-                    cur.clear();
-                }
+            res.push_back(dsu.getIslands());
+        }
 
         return res;
     }
+private:
+    class DSU{
+        public:
+        DSU(int n){
+            arr = vector<int>(n,-1);
+            rank = vector<int>(n,0);
+            groups = 0;
+        }
+        void beIsland(int n){
+            if(arr[n] == -1){
+                arr[n] = n;
+                groups++;
+            }
+        }
+        int findParent(int n){
+            if(n != arr[n]){
+                arr[n] = findParent(arr[n]);
+            }
+            return arr[n];
+        }
+        void unionNodes(int a,int b){
+            int rootA = findParent(a), rootB = findParent(b);
+            if(rootA == rootB)
+                return;
+            if(rank[rootA] < rank[rootB])
+                arr[rootA] = rootB;
+            else if(rank[rootB] < rank[rootA])
+                arr[rootB] = rootA;
+            else{
+                arr[rootA] = rootB;
+                rank[rootB]++;
+            }
+            groups--;
+        }
+        int getIslands(){
+            return groups;
+        }
+        int isIsland(int n){
+            return arr[n] != -1;
+        }
+        private:
+            vector<int> arr;
+            vector<int> rank;
+            int groups;
+    };
 };
 
 // https://tinyurl.com/4mym72uw
