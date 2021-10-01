@@ -39,3 +39,5 @@ average = totalsum / (a + b)
 average * a && average * b are a integer.
 if there is possible to collect a elements from the given array and sum is a * average.
 */
+
+// https://tinyurl.com/zjvv4dwp
