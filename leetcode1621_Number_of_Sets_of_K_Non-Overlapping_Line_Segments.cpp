@@ -22,4 +22,4 @@ public:
     }
 };
 
-// https://github.com/xiaojun-wu/LeetcodeDailyChallengeGroup/blob/master/leetcode1621_Number_of_Sets_of_K_Non-Overlapping_Line_Segments.cpp
+// https://tinyurl.com/3y57yvk4
