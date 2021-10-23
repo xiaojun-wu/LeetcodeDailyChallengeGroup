@@ -20,3 +20,5 @@ public:
         return presum[LEN];
     }
 };
+
+// https://tinyurl.com/d7jusaz3
