@@ -17,3 +17,5 @@ class Solution {
         return Arrays.stream(matrix[ROW - 1]).min().getAsInt();
     }
 }
+
+// https://tinyurl.com/yrb6knp3
