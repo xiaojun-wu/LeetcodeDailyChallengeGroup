@@ -35,3 +35,5 @@ class DetectSquares {
  * obj.add(point);
  * int param_2 = obj.count(point);
  */
+
+ // https://tinyurl.com/3e669wx4
