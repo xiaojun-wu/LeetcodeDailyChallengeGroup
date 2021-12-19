@@ -46,3 +46,5 @@ class Solution {
         buildRes(node.right,row + 1,col + (1 << (height - row - 1)));
     }
 }
+
+// https://tinyurl.com/2p9fzx75
