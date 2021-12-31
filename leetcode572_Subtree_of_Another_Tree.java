@@ -30,3 +30,5 @@ class Solution {
         return isSame(node1.left,node2.left) && isSame(node1.right,node2.right);
     }
 }
+
+// https://tinyurl.com/4tbyjwyu
