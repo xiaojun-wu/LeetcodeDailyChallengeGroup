@@ -72,3 +72,5 @@ class Trie{
         return false;
     }
 }
+
+// https://tinyurl.com/3m6akzpu
